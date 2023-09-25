@@ -16,14 +16,14 @@ Most notable packages one should know:
  -xUnit
  -EntityFrameworkCore.InMemory
 
-##Setting up
+## Setting up
 Clone the repository normally. After the cloning process is done, make sure that Books.db exists in the same folder as BookStoreAPI. 
 
-###The Database
+### The Database
 Database is hosted on Sqlite. So, make sure you have that set up before booting the project. Make sure to run the following command on Package Manager Console:
 ```db-update```
 The database will be set up during that process.
 
-##Booting up. 
+## Booting up. 
 After setting up the database, the initial startup will give you the swagger page. 
 ![image](https://github.com/n0laja00/BookStoreAPI/assets/73889850/643c62a6-29e8-4bb7-acb3-8479bc08ae6a)
