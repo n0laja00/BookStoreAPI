@@ -24,6 +24,6 @@ Database is hosted on Sqlite. So, make sure you have that set up before booting 
 ```db-update```
 The database will be set up during that process.
 
-## Booting up. 
+## Booting up 
 After setting up the database, the initial startup will give you the swagger page. 
 ![image](https://github.com/n0laja00/BookStoreAPI/assets/73889850/643c62a6-29e8-4bb7-acb3-8479bc08ae6a)
