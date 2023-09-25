@@ -34,3 +34,8 @@ After setting up the database, the initial startup will give you the swagger pag
  ## Database for tests
  Database is held inside InMemory database. It doesn't need any setup to work. It's filled with dummy data. 
  ![image](https://github.com/n0laja00/BookStoreAPI/assets/73889850/988eb9e5-2d33-48ea-bc27-2f35d7d1ae41)
+
+## running tests
+Tests can be run from the top bar as normal. The .Tests file should automatically a connection to BookStoreAPI solution. If all goes well, the tests should execute successfully.
+![image](https://github.com/n0laja00/BookStoreAPI/assets/73889850/75624d3d-01df-44c7-8ea6-3c71e2fa0144)
+
