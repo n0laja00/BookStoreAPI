@@ -51,7 +51,7 @@ namespace BooksStoreAPI.Tests
         }
         
         [Fact]
-        public async void BookRepository_GetBookByAuthor_ReturnsBook()
+        public async void BookStoreAPI_GetBookByAuthor_ReturnsBook()
         {
             //arrange
             var author = "1";
@@ -73,7 +73,7 @@ namespace BooksStoreAPI.Tests
         }
         
         [Fact]
-        public async void BookRepository_GetBookByYear_ReturnsBook()
+        public async void BookStoreAPI_GetBookByYear_ReturnsBook()
         {
             //arrange
             var year = 2;
@@ -95,7 +95,7 @@ namespace BooksStoreAPI.Tests
         }
         
         [Fact]
-        public async void BookRepository_GetBookByPublisher_ReturnsBook()
+        public async void BookStoreAPI_GetBookByPublisher_ReturnsBook()
         {
             //arrange
             var publisher = "3";
@@ -117,7 +117,7 @@ namespace BooksStoreAPI.Tests
         }
         
         [Fact]
-        public async void BookRepository_GetBook_ReturnsErrorBecauseEmptyStringAuthor()
+        public async void BookStoreAPI_GetBook_ReturnsErrorBecauseEmptyStringAuthor()
         {
             //arrange
             var author = "";
@@ -133,7 +133,7 @@ namespace BooksStoreAPI.Tests
         }
 
         [Fact]
-        public async void BookRepository_GetBook_ReturnsErrorBecauseEmptyStringPublisher()
+        public async void BookStoreAPI_GetBook_ReturnsErrorBecauseEmptyStringPublisher()
         {
             //arrange
             var publisher = "";
@@ -149,7 +149,7 @@ namespace BooksStoreAPI.Tests
         }
 
         [Fact]
-        public async void BookRepository_GetBook_ReturnsAllBooks()
+        public async void BookStoreAPI_GetBook_ReturnsAllBooks()
         {
             //arrange
             var dbContext = await GetDatabaseContext();
@@ -170,7 +170,7 @@ namespace BooksStoreAPI.Tests
         }
 
         [Fact]
-        public async void BookRepository_DeleteBook_ReturnContainsNoContent()
+        public async void BookStoreAPI_DeleteBook_ReturnContainsNoContent()
         {
             //arrange
             var dbContext = await GetDatabaseContext();
@@ -190,7 +190,7 @@ namespace BooksStoreAPI.Tests
         }
 
         [Fact]
-        public async void BookRepository_Post_ReturnsId()
+        public async void BookStoreAPI_Post_ReturnsId()
         {
             //arrange
             var dbContext = await GetDatabaseContext();
@@ -199,11 +199,11 @@ namespace BooksStoreAPI.Tests
             Book book = new Book()
             {
                 Id = 11,
-                Title = "BookRepository Post ReturnsId",
-                Author = "BookRepository Post ReturnsId",
+                Title = "BookStoreAPI Post ReturnsId",
+                Author = "BookStoreAPI Post ReturnsId",
                 Year = 11,
-                Publisher = "BookRepository Post ReturnsId",
-                Description = "BookRepository Post ReturnsId"
+                Publisher = "BookStoreAPI Post ReturnsId",
+                Description = "BookStoreAPI Post ReturnsId"
             };
 
             //act
@@ -219,7 +219,7 @@ namespace BooksStoreAPI.Tests
         }
 
         [Fact]
-        public async void BookRepository_PostWithoutDescription_ReturnsId()
+        public async void BookStoreAPI_PostWithoutDescription_ReturnsId()
         {
             //arrange
             var dbContext = await GetDatabaseContext();
@@ -228,10 +228,10 @@ namespace BooksStoreAPI.Tests
             Book book = new Book()
             {
                 Id = 11,
-                Title = "BookRepository Post ReturnsId",
-                Author = "BookRepository Post ReturnsId",
+                Title = "BookStoreAPI Post ReturnsId",
+                Author = "BookStoreAPI Post ReturnsId",
                 Year = 11,
-                Publisher = "BookRepository Post ReturnsId",
+                Publisher = "BookStoreAPI Post ReturnsId",
                 Description = null
             };
 
@@ -248,7 +248,7 @@ namespace BooksStoreAPI.Tests
         }
 
         [Fact]
-        public async void BookRepository_PostWithoutPublisher_ReturnsId()
+        public async void BookStoreAPI_PostWithoutPublisher_ReturnsId()
         {
             //arrange
             var dbContext = await GetDatabaseContext();
@@ -257,11 +257,11 @@ namespace BooksStoreAPI.Tests
             Book book = new Book()
             {
                 Id = 11,
-                Title = "BookRepository Post ReturnsId",
-                Author = "BookRepository Post ReturnsId",
+                Title = "BookStoreAPI Post ReturnsId",
+                Author = "BookStoreAPI Post ReturnsId",
                 Year = 11,
                 Publisher = null,
-                Description = "BookRepository Post ReturnsId"
+                Description = "BookStoreAPI Post ReturnsId"
             };
 
             //act
@@ -277,7 +277,7 @@ namespace BooksStoreAPI.Tests
         }
 
         [Fact]
-        public async void BookRepository_PostWithoutDescriptionAndPublisher_ReturnsId()
+        public async void BookStoreAPI_PostWithoutDescriptionAndPublisher_ReturnsId()
         {
             //arrange
             var dbContext = await GetDatabaseContext();
@@ -286,8 +286,8 @@ namespace BooksStoreAPI.Tests
             Book book = new Book()
             {
                 Id = 11,
-                Title = "BookRepository Post ReturnsId",
-                Author = "BookRepository Post ReturnsId",
+                Title = "BookStoreAPI Post ReturnsId",
+                Author = "BookStoreAPI Post ReturnsId",
                 Year = 11,
                 Publisher = null,
                 Description = null
