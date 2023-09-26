@@ -18,6 +18,7 @@ namespace BookStoreAPI.Models
         public string Author { get; set; }
         [Required]
         public int Year { get; set; }
+        [MinLength(1)]
         public string? Publisher { get; set; }
         public string? Description { get; set; }
     }
