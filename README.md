@@ -27,6 +27,21 @@ Database is hosted on Sqlite (in the file Books.db). So, make sure you have the 
 ```db-update```
 The database will be set up during that process.
 
+### Folder categorisation
+
+![image](https://github.com/n0laja00/BookStoreAPI/assets/73889850/2619f2e3-dee4-4ad9-97db-4df83f033929)
+
+Starting from the top, we have controllers, that contains BooksController, which is reponsible for getting data. 
+
+Data folder contains datacontext and db migration files. 
+
+Middleware contains errorhandling and anti-Xss middleware. 
+
+Models houses three datamodels, Book, HttpResponseException, and PostRequestResponseMessage.
+
+Utilities consists of two utility classes, HttpResponseUtilities and QueryUtilities. HttpResponseUtilities is used for throwing exceptions and AueryUtilities is used for depositing functions from BooksController to make it cleaner.
+
+
 ## Booting up 
 After setting up the database, the initial startup will give you the swagger page. 
 
