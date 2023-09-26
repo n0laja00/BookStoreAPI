@@ -1,14 +1,22 @@
 # BookStoreAPI
-Welcome to Bookstore API! Let's begin...
+This is a bookstore or just a book api written in c# using asp.net core 6 core. THe goal of this project was to make an api, that returns books to anyone who calls it. It's also designed to be somewhat resistant to XSS attacks and has some rudimentary unit tests.
 
 Most notable packages one should know:
+ 
  -asp.net 6 core
+ 
  -runs on port 9000
+ 
  -c#
+ 
  -AspNetCore.Identity.EntityFrameworkCore
+ 
  -Microsoft.EntityFrameworkCore.Sqlite
+ 
  -Microsoft.EntityFrameworkCore.Tools
+ 
  -Newtonsoft
+ 
  -HtmlSanitizer 
 
 ## Setting up
@@ -27,9 +35,13 @@ After setting up the database, the initial startup will give you the swagger pag
 # BookStoreAPI.Tests
 
  Things to know about .Tests:
+ 
  -asp.net 6 core
+ 
  -Fluent Assertions
+ 
  -xUnit
+ 
  -EntityFrameworkCore.InMemory
 
  ## Database for tests
