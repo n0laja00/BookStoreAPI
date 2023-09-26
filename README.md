@@ -35,9 +35,13 @@ After setting up the database, the initial startup will give you the swagger pag
 # BookStoreAPI.Tests
 
  Things to know about .Tests:
+ 
  -asp.net 6 core
+ 
  -Fluent Assertions
+ 
  -xUnit
+ 
  -EntityFrameworkCore.InMemory
 
  ## Database for tests
