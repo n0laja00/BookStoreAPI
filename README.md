@@ -1,5 +1,5 @@
 # BookStoreAPI
-Welcome to Bookstore API! Let's begin...
+This is a bookstore or just a book api written in c# using asp.net core 6 core. THe goal of this project was to make an api, that returns books to anyone who calls it. It's also designed to be somewhat resistant to XSS attacks and has some rudimentary unit tests.
 
 Most notable packages one should know:
  
