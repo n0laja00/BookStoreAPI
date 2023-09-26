@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace BookStoreAPI.Helpers
+namespace BookStoreAPI.Models
 {
     [Serializable]
     internal class HttpResponseException : Exception

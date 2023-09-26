@@ -9,6 +9,12 @@ namespace BookStoreAPI.Utilities
 {
     public class QueryUtilities
     {
+        /// <summary>
+        /// Query to filter by author
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="author"></param>
+        /// <returns>Query that filters by author</returns>
         public static IQueryable<Book> FilterByAuthor(IQueryable<Book> query, string? author)
         {
             if (author != null)
@@ -22,6 +28,12 @@ namespace BookStoreAPI.Utilities
             return query;
         }
 
+        /// <summary>
+        /// Query to filter by year
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="author"></param>
+        /// <returns>Query that filters by year</returns>
         public static IQueryable<Book> FilterByYear(IQueryable<Book> query, int? year)
         {
             if (year != null)
@@ -32,6 +44,12 @@ namespace BookStoreAPI.Utilities
             return query;
         }
 
+        /// <summary>
+        /// Query to filter by author
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="author"></param>
+        /// <returns>Query that filters by year</returns>
         public static IQueryable<Book> FilterByPublisher(IQueryable<Book> query, string? publisher)
         {
             if (publisher != null)
@@ -51,9 +69,7 @@ namespace BookStoreAPI.Utilities
         /// </summary>
         /// <param name="title">Title of the book</param>
         /// <param name="author">The name of the author</param>
-        /// <param name="year"> Year published<
-        /// 
-        /// /param>
+        /// <param name="year"> Year published</param>
         /// <returns>True if the book exists. False if it doesn't.</returns>
         public static bool BookExistsInDatabase(DataContext DataContext, string title, string author, int year)
         {

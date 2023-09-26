@@ -1,4 +1,4 @@
-﻿using BookStoreAPI.Helpers;
+﻿using BookStoreAPI.Models;
 using Microsoft.VisualStudio.Web.CodeGeneration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
