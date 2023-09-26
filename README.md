@@ -47,6 +47,11 @@ After setting up the database, the initial startup will give you the swagger pag
 
 ![image](https://github.com/n0laja00/BookStoreAPI/assets/73889850/643c62a6-29e8-4bb7-acb3-8479bc08ae6a)
 
+Responses containing books are sent back in Json.
+
+![image](https://github.com/n0laja00/BookStoreAPI/assets/73889850/f1416e66-af17-46eb-a7f5-557d611b15ed)
+
+
 # BookStoreAPI.Tests
 
  Things to know about .Tests:
