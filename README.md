@@ -2,13 +2,21 @@
 Welcome to Bookstore API! Let's begin...
 
 Most notable packages one should know:
+ 
  -asp.net 6 core
+ 
  -runs on port 9000
+ 
  -c#
+ 
  -AspNetCore.Identity.EntityFrameworkCore
+ 
  -Microsoft.EntityFrameworkCore.Sqlite
+ 
  -Microsoft.EntityFrameworkCore.Tools
+ 
  -Newtonsoft
+ 
  -HtmlSanitizer 
 
 ## Setting up
