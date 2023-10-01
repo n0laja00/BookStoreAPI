@@ -15,11 +15,11 @@ namespace BookStoreAPI.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", nullable: false),
-                    Author = table.Column<string>(type: "TEXT", nullable: false),
+                    Title = table.Column<string>(type: "Varchar", nullable: false, collation: "nocase"),
+                    Author = table.Column<string>(type: "Varchar", nullable: false, collation: "nocase"),
                     Year = table.Column<int>(type: "INTEGER", nullable: false),
-                    Publisher = table.Column<string>(type: "TEXT", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: true)
+                    Publisher = table.Column<string>(type: "Varchar", nullable: true, collation: "nocase"),
+                    Description = table.Column<string>(type: "Varchar", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -69,6 +69,7 @@ namespace BookStoreAPI.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Book");
+           
         }
     }
 }
