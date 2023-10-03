@@ -6,6 +6,8 @@ Most notable packages one should know:
  -asp.net 6 core
  
  -runs on port 9000 (http) and 9001 (https)
+    -https://localhost:9001/books/
+    -http://localhost:9000/books/
  
  -c#
  
@@ -29,8 +31,6 @@ The database will be set up during that process.
 
 ### Folder categorisation
 
-![image](https://github.com/n0laja00/BookStoreAPI/assets/73889850/2619f2e3-dee4-4ad9-97db-4df83f033929)
-
 Starting from the top, we have controllers, that contains BooksController, which is reponsible for getting data. 
 
 Data folder contains datacontext and db migration files. 
@@ -45,11 +45,8 @@ Utilities consists of two utility classes, HttpResponseUtilities and QueryUtilit
 ## Booting up 
 After setting up the database, the initial startup will give you the swagger page. 
 
-![image](https://github.com/n0laja00/BookStoreAPI/assets/73889850/643c62a6-29e8-4bb7-acb3-8479bc08ae6a)
 
 Responses containing books are sent back in Json.
-
-![image](https://github.com/n0laja00/BookStoreAPI/assets/73889850/f1416e66-af17-46eb-a7f5-557d611b15ed)
 
 
 # BookStoreAPI.Tests
