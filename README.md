@@ -44,6 +44,8 @@ Models houses three datamodels, Book, HttpResponseException, and PostRequestResp
 
 Utilities consists of two utility classes, HttpResponseUtilities and QueryUtilities. HttpResponseUtilities is used for throwing exceptions and AueryUtilities is used for depositing functions from BooksController to make it cleaner.
 
+![image](https://github.com/n0laja00/BookStoreAPI/assets/73889850/e07b6b14-6497-434b-8633-475c800487e1)
+
 
 ## Booting up 
 After setting up the database, the initial startup will give you the swagger page. 
