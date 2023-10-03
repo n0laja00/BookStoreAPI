@@ -43,7 +43,7 @@ namespace BookStoreAPI.Controllers
             List<Book> books;
             if (_context.Book == null)
             {
-                HttpResponseUtilities.ThrowHttpException("Not found. Something went wrong with data retrieval.", HttpStatusCode.NotFound);
+                return HttpResponseUtilities.ThrowHttpException("Not found. Something went wrong with data retrieval.", HttpStatusCode.NotFound);
             }
             var query = _context.Book.AsQueryable();
 
@@ -55,10 +55,7 @@ namespace BookStoreAPI.Controllers
 
             books.Distinct().ToList();
 
-            if (books.Count() == 0)
-            {
-               HttpResponseUtilities.ThrowHttpException("Not found. No books were found.", HttpStatusCode.NotFound);
-            }
+
             string result = JsonConvert.SerializeObject(books);
             return result;
         }
@@ -70,19 +67,18 @@ namespace BookStoreAPI.Controllers
         /// <param name="id"></param>
         /// <returns>Json: returns a book of specific ID. Exception is thrown at a failed operation.</returns>
         [HttpGet("{id}")]
-        public async Task<Object> GetBook(int id)
+        public async Task<ActionResult<Object>> GetBook(int id)
         {
             if (_context.Book == null)
             {
-                HttpResponseUtilities.ThrowHttpException("Not Found. Something went wrong with data retrieval.", HttpStatusCode.NotFound);
+                return HttpResponseUtilities.ThrowHttpException("Not Found. Something went wrong with data retrieval.", HttpStatusCode.NotFound);
             }
 
             var book = await _context.Book.FindAsync(id);
 
             if (book == null)
             {
-                HttpResponseUtilities.ThrowHttpException("Not found. The book doesn't exist.", HttpStatusCode.NotFound);
-                
+                return HttpResponseUtilities.ThrowHttpException("Not found. The book doesn't exist.", HttpStatusCode.NotFound);
             }
 
             string result = JsonConvert.SerializeObject(book);
@@ -99,11 +95,17 @@ namespace BookStoreAPI.Controllers
         /// <param name="book">Model: Book</param>
         /// <returns>Json: Id of the book just created in result. Exception is thrown at a failed operation.</returns>
         [HttpPost]
-        public async Task<Object> PostBook(Book book)
+        public async Task<ActionResult<Object>> PostBook( Book book)
         {
+
             if (_context.Book == null)
             {
-                HttpResponseUtilities.ThrowHttpException("Bad Request. Something went wrong with data retrieval.", HttpStatusCode.NotFound);
+                return HttpResponseUtilities.ThrowHttpException("Not Found. Something went wrong with data retrieval.", HttpStatusCode.NotFound);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return HttpResponseUtilities.ThrowHttpException("Bad Request.", HttpStatusCode.BadRequest);
             }
 
             var context = _context;
@@ -125,15 +127,12 @@ namespace BookStoreAPI.Controllers
                 } 
                 else
                 {
-                    var errorResponse = HttpResponseUtilities.ThrowHttpException("Internal Server Error. Something went wrong with book creation.", HttpStatusCode.InternalServerError);
-                    return errorResponse;
+                    return HttpResponseUtilities.ThrowHttpException("Internal Server Error. Something went wrong with book creation.", HttpStatusCode.InternalServerError);
                 }
             } else
             {
-                var errorResponse = HttpResponseUtilities.ThrowHttpException("Bad Request. The book already exists.", HttpStatusCode.BadRequest);
-                return errorResponse;
+                return HttpResponseUtilities.ThrowHttpException("Bad Request. The book already exists.", HttpStatusCode.BadRequest);
             };
-
         }
 
         // DELETE: api/Book/5
@@ -143,24 +142,24 @@ namespace BookStoreAPI.Controllers
         /// <param name="id"></param>
         /// <returns>Returns No Content if successful. Exception is thrown at a failed operation.</returns>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBook(int id)
+        public async Task<Object> DeleteBook(int id)
         {
             if (_context.Book == null)
             {
-                HttpResponseUtilities.ThrowHttpException("Bad Request. Something went wrong with data retrieval.", HttpStatusCode.NotFound);
+                return HttpResponseUtilities.ThrowHttpException("Not found. Something went wrong with data retrieval.", HttpStatusCode.NotFound);
             }
 
             var book = await _context.Book.FindAsync(id);
 
             if (book == null)
             {
-                HttpResponseUtilities.ThrowHttpException("Bad Request. The book doesn't exist.", HttpStatusCode.NotFound);
+                return HttpResponseUtilities.ThrowHttpException("Not found. The book doesn't exist.", HttpStatusCode.NotFound);
             }
 
             _context.Book.Remove(book);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return HttpResponseUtilities.ThrowHttpException("No Content.", HttpStatusCode.NoContent);
         }
 
 

@@ -1,5 +1,6 @@
 using BookStoreAPI.Data;
 using BookStoreAPI.middleware;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,12 @@ builder.Services.AddSwaggerGen();
 //Establish Connection String to DB
 builder.Services.AddDbContext<DataContext>( options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("BookStoreDefault")));
+
+//Disable automatic 400 response on requests. 
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
 
 var app = builder.Build();
 

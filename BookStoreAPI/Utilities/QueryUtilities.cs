@@ -71,7 +71,7 @@ namespace BookStoreAPI.Utilities
         /// <param name="author">The name of the author</param>
         /// <param name="year"> Year published</param>
         /// <returns>True if the book exists. False if it doesn't.</returns>
-        public static bool BookExistsInDatabase(DataContext DataContext, string title, string author, int year)
+        public static bool BookExistsInDatabase(DataContext DataContext, string title, string author, int? year=0)
         {
             return (DataContext.Book?.Any(e => e.Author == author && e.Title == title && e.Year == year)).GetValueOrDefault();
         }
