@@ -26,7 +26,10 @@ Clone the repository normally. After the cloning process is done, make sure that
 
 ### The Database
 Database is hosted on Sqlite (in the file Books.db). So, make sure you have the file before booting the project. Make sure to run the following command on Package Manager Console:
-```db-update```
+```update-database```
+or you might have to
+```drop-database```
+
 The database will be set up during that process.
 
 ### Folder categorisation
@@ -44,6 +47,7 @@ Utilities consists of two utility classes, HttpResponseUtilities and QueryUtilit
 
 ## Booting up 
 After setting up the database, the initial startup will give you the swagger page. 
+![image](https://github.com/n0laja00/BookStoreAPI/assets/73889850/496a5b46-f7d0-497d-91ed-ee75f97a555b)
 
 
 Responses containing books are sent back in Json.
@@ -63,6 +67,8 @@ Responses containing books are sent back in Json.
 
  ## Database for tests
  Database is held inside InMemory database. It doesn't need any setup to work. It's filled with dummy data. 
+ ![image](https://github.com/n0laja00/BookStoreAPI/assets/73889850/0327ed8d-f133-4c4a-a580-3d545e1dab3e)
+
 
 ## running tests
 Tests can be run from the top bar as normal. The .Tests file should automatically a connection to BookStoreAPI solution. If all goes well, the tests should execute successfully.
