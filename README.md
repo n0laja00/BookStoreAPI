@@ -6,7 +6,9 @@ Most notable packages one should know:
  -asp.net 6 core
  
  -runs on port 9000 (http) and 9001 (https)
+    
     -https://localhost:9001/books/
+   
     -http://localhost:9000/books/
  
  -c#
