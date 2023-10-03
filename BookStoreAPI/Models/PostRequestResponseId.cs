@@ -6,7 +6,7 @@
     /// Oh well, it works. 
     /// for ID reponse for post requests
     /// </summary>
-    public class PostRequestResponseMessage
+    public class PostRequestResponseId
     {
         public int? Id { get; set; }
     }

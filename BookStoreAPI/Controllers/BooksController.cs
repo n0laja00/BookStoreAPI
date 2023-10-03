@@ -120,7 +120,7 @@ namespace BookStoreAPI.Controllers
                 //Check that the book was truly created.
                 if (book.Id != null)
                 {
-                    PostRequestResponseMessage returnId = new PostRequestResponseMessage();
+                    PostRequestResponseId returnId = new PostRequestResponseId();
                     returnId.Id = book.Id;
                     string result = JsonConvert.SerializeObject(returnId);
                     return result;
