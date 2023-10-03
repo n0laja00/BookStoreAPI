@@ -18,7 +18,7 @@ using BookStoreAPI.Utilities;
 
 namespace BookStoreAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class BooksController : ControllerBase
     {
@@ -142,7 +142,7 @@ namespace BookStoreAPI.Controllers
         /// <param name="id"></param>
         /// <returns>Returns No Content if successful. Exception is thrown at a failed operation.</returns>
         [HttpDelete("{id}")]
-        public async Task<Object> DeleteBook(int id)
+        public async Task<ActionResult<Object>> DeleteBook(int id)
         {
             if (_context.Book == null)
             {

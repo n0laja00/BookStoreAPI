@@ -49,7 +49,7 @@ namespace BookStoreAPI.middleware
                 var sanitisedUrl = sanitiserUrl.Sanitize(url);
 
                 //compare results
-                if (content != sanitisedBody.Replace("&amp;", "&"))
+                if (content.Replace("\r", "") != sanitisedBody.Replace("&amp;", "&"))
                 {
                     await RespondWithAnError(context);
                 }

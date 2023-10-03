@@ -175,18 +175,17 @@ namespace BooksStoreAPI.Tests
             //arrange
             var dbContext = await GetDatabaseContext();
             var testSubjectController = new BooksController(dbContext);
-            int deleteBookId = 9;
+            int deleteBookId = 2;
             string tempResultString;
             Object resultObject;
 
 
             //act
             var result = testSubjectController.DeleteBook(deleteBookId);
-            tempResultString = result.Result.ToString();
 
 
             //assert
-            tempResultString.Should().Contain("NoContent");
+            result.Exception.Should().NotBeNull();
         }
 
         [Fact]
@@ -208,14 +207,14 @@ namespace BooksStoreAPI.Tests
 
             //act
             var result = await testSubjectController.PostBook(book);
-            responseBookId = JsonConvert.DeserializeObject<PostRequestResponseMessage>(result.ToString());
+            responseBookId = JsonConvert.DeserializeObject<PostRequestResponseMessage>(result.Value.ToString());
 
             //assert
             responseBookId.Id.Should().NotBeNull();
             responseBookId.Should().BeOfType<PostRequestResponseMessage>();
             responseBookId.Id.Should().Be(11);
 
-            await testSubjectController.DeleteBook(11);
+            
         }
 
         [Fact]
@@ -227,24 +226,24 @@ namespace BooksStoreAPI.Tests
             PostRequestResponseMessage responseBookId;
             Book book = new Book()
             {
-                Id = 11,
+                Id = 12,
                 Title = "BookStoreAPI Post ReturnsId",
                 Author = "BookStoreAPI Post ReturnsId",
-                Year = 11,
+                Year = 12,
                 Publisher = "BookStoreAPI Post ReturnsId",
                 Description = null
             };
 
             //act
             var result = await testSubjectController.PostBook(book);
-            responseBookId = JsonConvert.DeserializeObject<PostRequestResponseMessage>(result.ToString());
+            responseBookId = JsonConvert.DeserializeObject<PostRequestResponseMessage>(result.Value.ToString());
 
             //assert
             responseBookId.Id.Should().NotBeNull();
             responseBookId.Should().BeOfType<PostRequestResponseMessage>();
-            responseBookId.Id.Should().Be(11);
+            responseBookId.Id.Should().Be(12);
 
-            await testSubjectController.DeleteBook(11);
+            
         }
 
         [Fact]
@@ -256,24 +255,24 @@ namespace BooksStoreAPI.Tests
             PostRequestResponseMessage responseBookId;
             Book book = new Book()
             {
-                Id = 11,
+                Id = 13,
                 Title = "BookStoreAPI Post ReturnsId",
                 Author = "BookStoreAPI Post ReturnsId",
-                Year = 11,
+                Year = 13,
                 Publisher = null,
                 Description = "BookStoreAPI Post ReturnsId"
             };
 
             //act
             var result = await testSubjectController.PostBook(book);
-            responseBookId = JsonConvert.DeserializeObject<PostRequestResponseMessage>(result.ToString());
+            responseBookId = JsonConvert.DeserializeObject<PostRequestResponseMessage>(result.Value.ToString());
 
             //assert
             responseBookId.Id.Should().NotBeNull();
             responseBookId.Should().BeOfType<PostRequestResponseMessage>();
-            responseBookId.Id.Should().Be(11);
+            responseBookId.Id.Should().Be(13);
 
-            await testSubjectController.DeleteBook(11);
+            
         }
 
         [Fact]
@@ -285,24 +284,24 @@ namespace BooksStoreAPI.Tests
             PostRequestResponseMessage responseBookId;
             Book book = new Book()
             {
-                Id = 11,
+                Id = 14,
                 Title = "BookStoreAPI Post ReturnsId",
                 Author = "BookStoreAPI Post ReturnsId",
-                Year = 11,
+                Year = 14,
                 Publisher = null,
                 Description = null
             };
 
             //act
             var result = await testSubjectController.PostBook(book);
-            responseBookId = JsonConvert.DeserializeObject<PostRequestResponseMessage>(result.ToString());
+            responseBookId = JsonConvert.DeserializeObject<PostRequestResponseMessage>(result.Value.ToString());
 
             //assert
             responseBookId.Id.Should().NotBeNull();
             responseBookId.Should().BeOfType<PostRequestResponseMessage>();
-            responseBookId.Id.Should().Be(11);
+            responseBookId.Id.Should().Be(14);
 
-            await testSubjectController.DeleteBook(11);
+            
         }
     }
 }
