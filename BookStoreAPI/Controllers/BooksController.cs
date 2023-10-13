@@ -89,17 +89,19 @@ namespace BookStoreAPI.Controllers
         /// <param name="book">Model: Book</param>
         /// <returns>Json: Id of the book just created in result. Exception is thrown at a failed operation.</returns>
         [HttpPost]
-        public async Task<ActionResult<Object>> PostBook(Book book)
+        public async Task<BookId> PostBook(Book book)
         {
 
             if (_context.Book == null)
             {
-                throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("Not Found. Something went wrong with data retrieval.", HttpStatusCode.NotFound));
+                throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("Not Found. Something went wrong with data retrieval.",
+                    HttpStatusCode.NotFound));
             }
 
             if (!ModelState.IsValid)
             {
-                throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("Bad Request.", HttpStatusCode.BadRequest));
+                throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("Bad Request.",
+                    HttpStatusCode.BadRequest));
             }
 
             var context = _context;
@@ -117,8 +119,7 @@ namespace BookStoreAPI.Controllers
                 {
                     BookId returnId = new BookId();
                     returnId.Id = book.Id;
-                    string result = JsonConvert.SerializeObject(returnId);
-                    return result;
+                    return returnId;
                 }
                 else
                 {
@@ -140,12 +141,12 @@ namespace BookStoreAPI.Controllers
         /// <param name="id"></param>
         /// <returns>Returns No Content if successful. Exception is thrown at a failed operation.</returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Object>> DeleteBook(int id)
+        public async Task<Book> DeleteBook(int id)
         {
             if (_context.Book == null)
             {
-                return HttpResponseUtilities.HttpResponseMessageMaker("Not found. Something went wrong with data retrieval.",
-                    HttpStatusCode.NotFound);
+                throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("Not Found. Something went wrong with data retrieval.",
+                    HttpStatusCode.NotFound));
             }
 
             var book = await _context.Book.FindAsync(id);
@@ -162,8 +163,5 @@ namespace BookStoreAPI.Controllers
             throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("No content",
                 HttpStatusCode.NoContent));
         }
-
-
-
     }
 }
