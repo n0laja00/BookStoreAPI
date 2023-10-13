@@ -7,6 +7,7 @@ namespace BookStoreAPI.Models
     /// <summary>
     /// Model for Books
     /// </summary>
+    #nullable enable
     public class Book
     {
         [Key]

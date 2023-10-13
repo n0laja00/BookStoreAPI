@@ -15,6 +15,7 @@ namespace BookStoreAPI.Utilities
         /// <param name="query"></param>
         /// <param name="author"></param>
         /// <returns>Query that filters by author</returns>
+        #nullable enable
         public static IQueryable<Book> FilterByAuthor(IQueryable<Book> query, string? author)
         {
             if (author != null)

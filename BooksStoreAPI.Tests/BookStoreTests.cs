@@ -194,7 +194,7 @@ namespace BooksStoreAPI.Tests
             //arrange
             var dbContext = await GetDatabaseContext();
             var testSubjectController = new BooksController(dbContext);
-            PostRequestResponseId responseBookId;
+            BookId responseBookId;
             Book book = new Book()
             {
                 Id = 11,
@@ -207,11 +207,11 @@ namespace BooksStoreAPI.Tests
 
             //act
             var result = await testSubjectController.PostBook(book);
-            responseBookId = JsonConvert.DeserializeObject<PostRequestResponseId>(result.Value.ToString());
+            responseBookId = JsonConvert.DeserializeObject<BookId>(result.Value.ToString());
 
             //assert
             responseBookId.Id.Should().NotBeNull();
-            responseBookId.Should().BeOfType<PostRequestResponseId>();
+            responseBookId.Should().BeOfType<BookId>();
             responseBookId.Id.Should().Be(11);
 
             
@@ -223,7 +223,7 @@ namespace BooksStoreAPI.Tests
             //arrange
             var dbContext = await GetDatabaseContext();
             var testSubjectController = new BooksController(dbContext);
-            PostRequestResponseId responseBookId;
+            BookId responseBookId;
             Book book = new Book()
             {
                 Id = 12,
@@ -236,11 +236,11 @@ namespace BooksStoreAPI.Tests
 
             //act
             var result = await testSubjectController.PostBook(book);
-            responseBookId = JsonConvert.DeserializeObject<PostRequestResponseId>(result.Value.ToString());
+            responseBookId = JsonConvert.DeserializeObject<BookId>(result.Value.ToString());
 
             //assert
             responseBookId.Id.Should().NotBeNull();
-            responseBookId.Should().BeOfType<PostRequestResponseId>();
+            responseBookId.Should().BeOfType<BookId>();
             responseBookId.Id.Should().Be(12);
 
             
@@ -252,7 +252,7 @@ namespace BooksStoreAPI.Tests
             //arrange
             var dbContext = await GetDatabaseContext();
             var testSubjectController = new BooksController(dbContext);
-            PostRequestResponseId responseBookId;
+            BookId responseBookId;
             Book book = new Book()
             {
                 Id = 13,
@@ -265,11 +265,11 @@ namespace BooksStoreAPI.Tests
 
             //act
             var result = await testSubjectController.PostBook(book);
-            responseBookId = JsonConvert.DeserializeObject<PostRequestResponseId>(result.Value.ToString());
+            responseBookId = JsonConvert.DeserializeObject<BookId>(result.Value.ToString());
 
             //assert
             responseBookId.Id.Should().NotBeNull();
-            responseBookId.Should().BeOfType<PostRequestResponseId>();
+            responseBookId.Should().BeOfType<BookId>();
             responseBookId.Id.Should().Be(13);
 
             
@@ -281,7 +281,7 @@ namespace BooksStoreAPI.Tests
             //arrange
             var dbContext = await GetDatabaseContext();
             var testSubjectController = new BooksController(dbContext);
-            PostRequestResponseId responseBookId;
+            BookId responseBookId;
             Book book = new Book()
             {
                 Id = 14,
@@ -294,11 +294,11 @@ namespace BooksStoreAPI.Tests
 
             //act
             var result = await testSubjectController.PostBook(book);
-            responseBookId = JsonConvert.DeserializeObject<PostRequestResponseId>(result.Value.ToString());
+            responseBookId = JsonConvert.DeserializeObject<BookId>(result.Value.ToString());
 
             //assert
             responseBookId.Id.Should().NotBeNull();
-            responseBookId.Should().BeOfType<PostRequestResponseId>();
+            responseBookId.Should().BeOfType<BookId>();
             responseBookId.Id.Should().Be(14);
 
             

@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookStoreAPI.Data;
 using BookStoreAPI.Models;
 using System.Net;
-using System.Text.Json;
 using Newtonsoft.Json;
-using System.Text.Encodings.Web;
-using System.Text;
 using BookStoreAPI.Helpers;
-using System.Security.Policy;
 using BookStoreAPI.Utilities;
 
 namespace BookStoreAPI.Controllers
@@ -38,12 +29,16 @@ namespace BookStoreAPI.Controllers
         /// <param name="publisher">string publisher</param>
         /// <returns>Json:All books or some books that fulfil query param conditions. Exception is thrown at a failed operation.</returns>
         [HttpGet("")]
-        public async Task<Object> GetBook(string? author=null, int? year=null, string? publisher = null)
+#nullable enable
+        public async Task<BookList> GetBook(string? author = null, int? year = null, string? publisher = null)
         {
-            List<Book> books;
+
+            BookList response = new BookList();
+
             if (_context.Book == null)
             {
-                return HttpResponseUtilities.ThrowHttpException("Not found. Something went wrong with data retrieval.", HttpStatusCode.NotFound);
+                throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("Not found. Something went wrong with data retrieval.",
+                    HttpStatusCode.NotFound));
             }
             var query = _context.Book.AsQueryable();
 
@@ -51,13 +46,11 @@ namespace BookStoreAPI.Controllers
             query = QueryUtilities.FilterByYear(query, year);
             query = QueryUtilities.FilterByPublisher(query, publisher);
 
-            books = await query.ToListAsync();
+            response.Books = await query.ToListAsync();
 
-            books.Distinct().ToList();
+            response.Books.Distinct().ToList();
 
-
-            string result = JsonConvert.SerializeObject(books);
-            return result;
+            return response;
         }
 
         // GET: api/Book/5
@@ -67,21 +60,22 @@ namespace BookStoreAPI.Controllers
         /// <param name="id"></param>
         /// <returns>Json: returns a book of specific ID. Exception is thrown at a failed operation.</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<Object>> GetBook(int id)
+        public async Task<Book> GetBook(int id)
         {
             if (_context.Book == null)
             {
-                return HttpResponseUtilities.ThrowHttpException("Not Found. Something went wrong with data retrieval.", HttpStatusCode.NotFound);
+                throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("Not Found. Something went wrong with data retrieval.",
+                    HttpStatusCode.NotFound));
             }
 
-            var book = await _context.Book.FindAsync(id);
+            Book result = await _context.Book.FindAsync(id);
 
-            if (book == null)
+            if (result == null)
             {
-                return HttpResponseUtilities.ThrowHttpException("Not found. The book doesn't exist.", HttpStatusCode.NotFound);
+                throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("Not found. The book doesn't exist.",
+                    HttpStatusCode.NotFound));
             }
 
-            string result = JsonConvert.SerializeObject(book);
             return result;
         }
 
@@ -95,23 +89,24 @@ namespace BookStoreAPI.Controllers
         /// <param name="book">Model: Book</param>
         /// <returns>Json: Id of the book just created in result. Exception is thrown at a failed operation.</returns>
         [HttpPost]
-        public async Task<ActionResult<Object>> PostBook( Book book)
+        public async Task<ActionResult<Object>> PostBook(Book book)
         {
 
             if (_context.Book == null)
             {
-                return HttpResponseUtilities.ThrowHttpException("Not Found. Something went wrong with data retrieval.", HttpStatusCode.NotFound);
+                throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("Not Found. Something went wrong with data retrieval.", HttpStatusCode.NotFound));
             }
 
             if (!ModelState.IsValid)
             {
-                return HttpResponseUtilities.ThrowHttpException("Bad Request.", HttpStatusCode.BadRequest);
+                throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("Bad Request.", HttpStatusCode.BadRequest));
             }
 
             var context = _context;
             //Find a similar book in the database and then process it
             bool bookExists = QueryUtilities.BookExistsInDatabase(context, book.Title, book.Author, book.Year);
-            if (!bookExists) { 
+            if (!bookExists)
+            {
                 _context.Book.Add(book);
                 await _context.SaveChangesAsync();
 
@@ -120,18 +115,21 @@ namespace BookStoreAPI.Controllers
                 //Check that the book was truly created.
                 if (book.Id != null)
                 {
-                    PostRequestResponseId returnId = new PostRequestResponseId();
+                    BookId returnId = new BookId();
                     returnId.Id = book.Id;
                     string result = JsonConvert.SerializeObject(returnId);
                     return result;
-                } 
+                }
                 else
                 {
-                    return HttpResponseUtilities.ThrowHttpException("Internal Server Error. Something went wrong with book creation.", HttpStatusCode.InternalServerError);
+                    throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("Internal Server Error. Something went wrong with book creation.",
+                        HttpStatusCode.InternalServerError));
                 }
-            } else
+            }
+            else
             {
-                return HttpResponseUtilities.ThrowHttpException("Bad Request. The book already exists.", HttpStatusCode.BadRequest);
+                throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("Bad Request. The book already exists.",
+                    HttpStatusCode.BadRequest));
             };
         }
 
@@ -146,20 +144,23 @@ namespace BookStoreAPI.Controllers
         {
             if (_context.Book == null)
             {
-                return HttpResponseUtilities.ThrowHttpException("Not found. Something went wrong with data retrieval.", HttpStatusCode.NotFound);
+                return HttpResponseUtilities.HttpResponseMessageMaker("Not found. Something went wrong with data retrieval.",
+                    HttpStatusCode.NotFound);
             }
 
             var book = await _context.Book.FindAsync(id);
 
             if (book == null)
             {
-                return HttpResponseUtilities.ThrowHttpException("Not found. The book doesn't exist.", HttpStatusCode.NotFound);
+                throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("Bad Request. The book already exists.",
+                    HttpStatusCode.BadRequest));
             }
 
             _context.Book.Remove(book);
             await _context.SaveChangesAsync();
 
-            return HttpResponseUtilities.ThrowHttpException("No Content.", HttpStatusCode.NoContent);
+            throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("No content",
+                HttpStatusCode.NoContent));
         }
 
 

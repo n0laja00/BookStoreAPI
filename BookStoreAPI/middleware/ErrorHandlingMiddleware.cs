@@ -12,7 +12,7 @@ namespace BookStoreAPI.middleware
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _requestDelegate;
-        public ErrorHandlingMiddleware(RequestDelegate requestDelegate) 
+        public ErrorHandlingMiddleware(RequestDelegate requestDelegate)
         {
             _requestDelegate = requestDelegate;
         }
@@ -39,14 +39,13 @@ namespace BookStoreAPI.middleware
         /// <param name="context"></param>
         /// <param name="exception"></param>
         /// <returns>Writes JSON Error</returns>
-        private static Task HandleExceptionAsync(HttpContext context, Exception exception) 
+        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
 
             var ex = exception as HttpResponseException;
 
-            var exceptionJson = JsonConvert.SerializeObject(new { error = ex.response });
-
-            context.Response.ContentType = "application/json";
+            var exceptionJson = JsonConvert.SerializeObject(new { ex.response.StatusCode, ex.response.ReasonPhrase });
+            context.Response.ContentType = "Application/json; charset=utf-8";
             return context.Response.WriteAsync(exceptionJson);
         }
 
