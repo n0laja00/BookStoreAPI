@@ -22,7 +22,7 @@ namespace BookStoreAPI.Utilities
             {
                 if (string.IsNullOrWhiteSpace(author))
                 {
-                    HttpResponseUtilities.ThrowHttpException("Author can't be empty", HttpStatusCode.BadRequest);
+                    HttpResponseUtilities.HttpResponseMessageMaker("Author can't be empty", HttpStatusCode.BadRequest);
                 }
                 query = query.Where(e => e.Author.ToLower() == author.ToLower());
             } 
@@ -57,7 +57,7 @@ namespace BookStoreAPI.Utilities
             {
                 if (string.IsNullOrWhiteSpace(publisher))
                 {
-                    HttpResponseUtilities.ThrowHttpException("Publisher can't be empty", HttpStatusCode.BadRequest);
+                    HttpResponseUtilities.HttpResponseMessageMaker("Publisher can't be empty", HttpStatusCode.BadRequest);
                 }
                 query = query.Where(e => e.Publisher.ToLower() == publisher.ToLower());
             }

@@ -99,7 +99,7 @@ namespace BookStoreAPI.middleware
             context.Response.Headers.Add("ContentType", "Application/json;");
             context.Response.StatusCode = _statusCode;
 
-            HttpResponseUtilities.ThrowHttpException("Xss warning.", HttpStatusCode.InternalServerError);
+            HttpResponseUtilities.HttpResponseMessageMaker("Xss warning.", HttpStatusCode.InternalServerError);
         }
 
 

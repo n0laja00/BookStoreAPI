@@ -49,7 +49,7 @@ namespace BooksStoreAPI.Tests
             }
             return databaseContext;
         }
-        
+
         [Fact]
         public async void BookStoreAPI_GetBookByAuthor_ReturnsBook()
         {
@@ -71,7 +71,7 @@ namespace BooksStoreAPI.Tests
             bookList[0].Author.Should().Be(author);
             bookList.Should().BeOfType<List<Book>>();
         }
-        
+
         [Fact]
         public async void BookStoreAPI_GetBookByYear_ReturnsBook()
         {
@@ -93,7 +93,7 @@ namespace BooksStoreAPI.Tests
             bookList[0].Year.Should().Be(year);
             bookList.Should().BeOfType<List<Book>>();
         }
-        
+
         [Fact]
         public async void BookStoreAPI_GetBookByPublisher_ReturnsBook()
         {
@@ -115,7 +115,7 @@ namespace BooksStoreAPI.Tests
             bookList[0].Publisher.Should().Be(publisher);
             bookList.Should().BeOfType<List<Book>>();
         }
-        
+
         [Fact]
         public async void BookStoreAPI_GetBook_ReturnsErrorBecauseEmptyStringAuthor()
         {
@@ -207,14 +207,14 @@ namespace BooksStoreAPI.Tests
 
             //act
             var result = await testSubjectController.PostBook(book);
-            responseBookId = JsonConvert.DeserializeObject<BookId>(result.Value.ToString());
+            responseBookId = JsonConvert.DeserializeObject<BookId>(result.Id.ToString());
 
             //assert
             responseBookId.Id.Should().NotBeNull();
             responseBookId.Should().BeOfType<BookId>();
             responseBookId.Id.Should().Be(11);
 
-            
+
         }
 
         [Fact]
@@ -236,14 +236,14 @@ namespace BooksStoreAPI.Tests
 
             //act
             var result = await testSubjectController.PostBook(book);
-            responseBookId = JsonConvert.DeserializeObject<BookId>(result.Value.ToString());
+            responseBookId = JsonConvert.DeserializeObject<BookId>(result.Id.ToString());
 
             //assert
             responseBookId.Id.Should().NotBeNull();
             responseBookId.Should().BeOfType<BookId>();
             responseBookId.Id.Should().Be(12);
 
-            
+
         }
 
         [Fact]
@@ -265,14 +265,14 @@ namespace BooksStoreAPI.Tests
 
             //act
             var result = await testSubjectController.PostBook(book);
-            responseBookId = JsonConvert.DeserializeObject<BookId>(result.Value.ToString());
+            responseBookId = JsonConvert.DeserializeObject<BookId>(result.Id.ToString());
 
             //assert
             responseBookId.Id.Should().NotBeNull();
             responseBookId.Should().BeOfType<BookId>();
             responseBookId.Id.Should().Be(13);
 
-            
+
         }
 
         [Fact]
@@ -294,14 +294,14 @@ namespace BooksStoreAPI.Tests
 
             //act
             var result = await testSubjectController.PostBook(book);
-            responseBookId = JsonConvert.DeserializeObject<BookId>(result.Value.ToString());
+            responseBookId = JsonConvert.DeserializeObject<BookId>(result.Id.ToString());
 
             //assert
             responseBookId.Id.Should().NotBeNull();
             responseBookId.Should().BeOfType<BookId>();
             responseBookId.Id.Should().Be(14);
 
-            
+
         }
     }
 }

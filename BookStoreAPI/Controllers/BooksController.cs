@@ -32,7 +32,6 @@ namespace BookStoreAPI.Controllers
 #nullable enable
         public async Task<BookList> GetBook(string? author = null, int? year = null, string? publisher = null)
         {
-
             BookList response = new BookList();
 
             if (_context.Book == null)
