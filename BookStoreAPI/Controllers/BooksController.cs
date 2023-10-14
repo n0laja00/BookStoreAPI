@@ -6,6 +6,7 @@ using System.Net;
 using Newtonsoft.Json;
 using BookStoreAPI.Helpers;
 using BookStoreAPI.Utilities;
+using BookStoreAPI.Interfaces;
 
 namespace BookStoreAPI.Controllers
 {
@@ -30,9 +31,9 @@ namespace BookStoreAPI.Controllers
         /// <returns>Json:All books or some books that fulfil query param conditions. Exception is thrown at a failed operation.</returns>
         [HttpGet("")]
 #nullable enable
-        public async Task<BookList> GetBook(string? author = null, int? year = null, string? publisher = null)
+        public async Task<IBookList> GetBook(string? author = null, int? year = null, string? publisher = null)
         {
-            BookList response = new BookList();
+            IBookList response = new BookList();
 
             if (_context.Book == null)
             {
@@ -59,7 +60,7 @@ namespace BookStoreAPI.Controllers
         /// <param name="id"></param>
         /// <returns>Json: returns a book of specific ID. Exception is thrown at a failed operation.</returns>
         [HttpGet("{id}")]
-        public async Task<Book> GetBook(int id)
+        public async Task<IBook> GetBook(int id)
         {
             if (_context.Book == null)
             {
@@ -67,7 +68,7 @@ namespace BookStoreAPI.Controllers
                     HttpStatusCode.NotFound));
             }
 
-            Book result = await _context.Book.FindAsync(id);
+            IBook result = await _context.Book.FindAsync(id);
 
             if (result == null)
             {
@@ -88,7 +89,7 @@ namespace BookStoreAPI.Controllers
         /// <param name="book">Model: Book</param>
         /// <returns>Json: Id of the book just created in result. Exception is thrown at a failed operation.</returns>
         [HttpPost]
-        public async Task<BookId> PostBook(Book book)
+        public async Task<IBookId> PostBook(Book book)
         {
 
             if (_context.Book == null)
@@ -116,7 +117,7 @@ namespace BookStoreAPI.Controllers
                 //Check that the book was truly created.
                 if (book.Id != null)
                 {
-                    BookId returnId = new BookId();
+                    IBookId returnId = new Book();
                     returnId.Id = book.Id;
                     return returnId;
                 }
@@ -140,7 +141,7 @@ namespace BookStoreAPI.Controllers
         /// <param name="id"></param>
         /// <returns>Returns No Content if successful. Exception is thrown at a failed operation.</returns>
         [HttpDelete("{id}")]
-        public async Task<Book> DeleteBook(int id)
+        public async Task<IBook> DeleteBook(int id)
         {
             if (_context.Book == null)
             {
@@ -152,15 +153,17 @@ namespace BookStoreAPI.Controllers
 
             if (book == null)
             {
-                throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("Bad Request. The book already exists.",
-                    HttpStatusCode.BadRequest));
+                throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("Not Found. The book doesn't exists.",
+                    HttpStatusCode.NotFound));
             }
+            else
+            {
+                _context.Book.Remove(book);
+                await _context.SaveChangesAsync();
 
-            _context.Book.Remove(book);
-            await _context.SaveChangesAsync();
-
-            throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("No content",
-                HttpStatusCode.NoContent));
+                throw new HttpResponseException(HttpResponseUtilities.HttpResponseMessageMaker("No content.",
+                    HttpStatusCode.NoContent));
+            }
         }
     }
 }

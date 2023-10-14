@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookStoreAPI.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,8 +8,8 @@ namespace BookStoreAPI.Models
     /// <summary>
     /// Model for Books
     /// </summary>
-    #nullable enable
-    public class Book
+#nullable enable
+    public class Book : IBookId, IBook
     {
         [Key]
         public int? Id { get; set; }

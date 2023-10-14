@@ -1,6 +1,8 @@
-﻿namespace BookStoreAPI.Models
+﻿using BookStoreAPI.Interfaces;
+
+namespace BookStoreAPI.Models
 {
-    public class BookList
+    public class BookList : IBookList
     {
 
         public List<Book>? Books { get; set; }
